@@ -1,0 +1,6 @@
+# 本地页面检查产生的 Playwright 临时文件
+.playwright-mcp/
+
+# Codex / Agents 本地运行时目录
+.codex/
+.agents/
