@@ -7,7 +7,7 @@
 
 ## NewAPI 首页内容
 
-- 当前首页内容维护文件是 `home_page/newapi_home_page_content.html`。
+- 当前首页内容维护文件是 `newapi_home_page_content.html`。
 - NewAPI 首页内容会先经过 Markdown 解析，再通过 HTML 注入页面。
 - 不要把完整 HTML 文档粘进 NewAPI 首页，例如 `<!doctype html>`、`<html>`、`<head>`、`<body>` 都不要使用。
 - 首页内容应使用可嵌入片段：一个外层容器、局部 CSS、正文 HTML。
@@ -24,6 +24,6 @@
 
 ## 线上检查流程
 
-- 每次改完 `home_page/newapi_home_page_content.html` 后，先停下让用户复制到 NewAPI。
+- 每次改完 `newapi_home_page_content.html` 后，先停下让用户复制到 NewAPI。
 - 未收到用户明确说明“已复制 / 请访问页面”前，不要主动访问线上站点。
 - 用户确认复制后，再访问 `https://new-api-latest-xhh3.onrender.com` 检查最终渲染效果。

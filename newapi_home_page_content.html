@@ -1,0 +1,705 @@
+<!--
+  文件功能：NewAPI 首页内容粘贴片段。
+  来源内容：https://freemodel.dev/dashboard/docs 的 Codex 安装指南。
+  样式风格：对齐 web/default 主题（Public Sans + oklch 配色 + Vercel/Geist 卡片风）。
+-->
+<style>
+  .codex-guide {
+    /* —— 与 web/default theme.css 同源的浅色变量 —— */
+    --cg-background: oklch(1 0 0);
+    --cg-foreground: oklch(0.145 0 0);
+    --cg-card: oklch(1 0 0);
+    --cg-muted: oklch(0.97 0 0);
+    --cg-muted-foreground: oklch(0.49 0 0);
+    --cg-border: oklch(0.93 0 0);
+    --cg-primary: oklch(0.13 0 0);
+    --cg-primary-foreground: oklch(0.985 0 0);
+    --cg-accent-bg: oklch(0.95 0 0);
+    --cg-accent-foreground: oklch(0.145 0 0);
+    --cg-warning: oklch(0.681 0.162 75.834);
+    --cg-warning-bg: oklch(0.985 0.04 85);
+    --cg-warning-border: oklch(0.88 0.08 80);
+    --cg-warning-foreground: oklch(0.32 0.08 60);
+    --cg-code-bg: oklch(0.22 0 0);
+    --cg-code-ink: oklch(0.95 0 0);
+    --cg-code-muted: oklch(0.7 0 0);
+    --cg-code-btn: oklch(0.32 0 0);
+    --cg-code-btn-hover: oklch(0.4 0 0);
+    --cg-radius: 0.5rem;
+
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 56px 20px 72px;
+    color: var(--cg-foreground);
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    line-height: 1.65;
+  }
+
+  .codex-guide * {
+    box-sizing: border-box;
+  }
+
+  /* —— Hero —— */
+  .cg-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+    gap: 32px;
+    align-items: stretch;
+    padding: 40px;
+    border: 1px solid var(--cg-border);
+    border-radius: calc(var(--cg-radius) * 1.8);
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 12%) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 10%) 0%, transparent 70%),
+      var(--cg-card);
+    overflow: hidden;
+  }
+
+  .cg-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--cg-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--cg-border) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 30%, black 20%, transparent 100%);
+    opacity: .08;
+    pointer-events: none;
+  }
+
+  .cg-hero > * {
+    position: relative;
+  }
+
+  .cg-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 16px;
+    padding: 5px 12px;
+    border: 1px solid var(--cg-border);
+    border-radius: 999px;
+    background: var(--cg-muted);
+    color: var(--cg-muted-foreground);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .codex-guide h1,
+  .codex-guide h2,
+  .codex-guide h3 {
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .codex-guide h1 {
+    max-width: 720px;
+    font-size: clamp(36px, 6vw, 60px);
+    letter-spacing: -0.03em;
+  }
+
+  .codex-guide h1 em,
+  .codex-guide h2 em,
+  .codex-guide h3 em {
+    background: linear-gradient(to right, oklch(0.65 0.2 250), oklch(0.6 0.22 290), oklch(0.55 0.24 320));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .cg-lead {
+    max-width: 680px;
+    margin: 20px 0 0;
+    color: var(--cg-muted-foreground);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .cg-system {
+    display: grid;
+    gap: 12px;
+    align-content: center;
+  }
+
+  .cg-system-card {
+    padding: 16px 18px;
+    border: 1px solid var(--cg-border);
+    border-radius: var(--cg-radius);
+    background: var(--cg-card);
+    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  }
+
+  .cg-system-card:hover {
+    transform: translateY(-1px);
+    border-color: oklch(0.85 0 0);
+    box-shadow: 0 4px 12px oklch(0 0 0 / 6%);
+  }
+
+  .cg-system-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--cg-foreground);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .cg-system-card p {
+    margin: 0;
+    color: var(--cg-muted-foreground);
+    font-size: 14px;
+  }
+
+  /* —— 目录 —— */
+  .cg-toc {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin: 24px 0 0;
+  }
+
+  .cg-toc a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--cg-border);
+    border-radius: var(--cg-radius);
+    background: var(--cg-card);
+    color: var(--cg-foreground);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+  }
+
+  .cg-toc a:hover {
+    border-color: oklch(0.82 0 0);
+    background: var(--cg-muted);
+    transform: translateY(-1px);
+  }
+
+  /* —— 章节卡 —— */
+  .cg-section {
+    margin-top: 16px;
+    padding: 32px;
+    border: 1px solid var(--cg-border);
+    border-radius: calc(var(--cg-radius) * 1.6);
+    background: var(--cg-card);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+
+  .cg-section:hover {
+    box-shadow: 0 4px 12px oklch(0 0 0 / 4%);
+  }
+
+  .cg-step-head {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .cg-num {
+    display: inline-grid;
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: var(--cg-radius);
+    background: var(--cg-primary);
+    color: var(--cg-primary-foreground);
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .codex-guide h2 {
+    font-size: 26px;
+  }
+
+  .codex-guide h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .cg-section p {
+    margin: 0 0 14px;
+    color: var(--cg-muted-foreground);
+    font-size: 15px;
+  }
+
+  /* —— 平台分栏 —— */
+  .cg-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .cg-platform {
+    padding: 18px;
+    border: 1px solid var(--cg-border);
+    border-radius: var(--cg-radius);
+    background: var(--cg-muted);
+  }
+
+  .cg-platform h3 {
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: var(--cg-foreground);
+  }
+
+  .cg-platform p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  /* —— 代码块 —— */
+  .cg-code-box {
+    position: relative;
+    margin: 12px 0 14px;
+    overflow-x: auto;
+    padding: 20px 100px 20px 22px;
+    border: 1px solid oklch(0.28 0 0);
+    border-radius: var(--cg-radius);
+    background: var(--cg-code-bg);
+    color: var(--cg-code-ink);
+    font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.6;
+    white-space: normal;
+  }
+
+  .cg-code-box span {
+    display: block;
+    min-height: 21px;
+    white-space: pre;
+  }
+
+  .cg-copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    min-width: 64px;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid oklch(1 0 0 / 14%);
+    border-radius: calc(var(--cg-radius) * 0.8);
+    background: var(--cg-code-btn);
+    color: var(--cg-code-ink);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 30px;
+    transition: background 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+
+  .cg-copy-btn:hover,
+  .cg-copy-btn[data-copied="true"] {
+    border-color: oklch(1 0 0 / 24%);
+    background: var(--cg-code-btn-hover);
+  }
+
+  .cg-copy-btn:active {
+    transform: scale(0.97);
+  }
+
+  .cg-muted-code {
+    color: var(--cg-code-muted);
+  }
+
+  /* —— 提示框 —— */
+  .cg-note {
+    margin: 14px 0 0;
+    padding: 12px 14px;
+    border: 1px solid var(--cg-warning-border);
+    border-left: 3px solid var(--cg-warning);
+    border-radius: var(--cg-radius);
+    background: var(--cg-warning-bg);
+    color: var(--cg-warning-foreground);
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .cg-note p {
+    margin: 0;
+    color: inherit;
+    font-size: 14px;
+  }
+
+  .cg-link {
+    color: var(--cg-foreground);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: oklch(0.75 0 0);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 150ms ease;
+  }
+
+  .cg-link:hover {
+    text-decoration-color: var(--cg-foreground);
+  }
+
+  /* —— 暗色模式（跟随 web/default 的 .dark 父级） —— */
+  .dark .codex-guide {
+    --cg-background: oklch(0.185 0 0);
+    --cg-foreground: oklch(0.965 0 0);
+    --cg-card: oklch(0.235 0 0);
+    --cg-muted: oklch(0.255 0 0);
+    --cg-muted-foreground: oklch(0.76 0 0);
+    --cg-border: oklch(1 0 0 / 9%);
+    --cg-primary: oklch(0.965 0 0);
+    --cg-primary-foreground: oklch(0.145 0 0);
+    --cg-accent-bg: oklch(0.325 0 0);
+    --cg-accent-foreground: oklch(0.985 0 0);
+    --cg-warning: oklch(0.769 0.188 70.08);
+    --cg-warning-bg: oklch(0.28 0.05 70 / 60%);
+    --cg-warning-border: oklch(0.4 0.08 70);
+    --cg-warning-foreground: oklch(0.92 0.1 85);
+    --cg-code-bg: oklch(0.16 0 0);
+    --cg-code-ink: oklch(0.92 0 0);
+    --cg-code-muted: oklch(0.62 0 0);
+    --cg-code-btn: oklch(0.3 0 0);
+    --cg-code-btn-hover: oklch(0.38 0 0);
+  }
+
+  .dark .cg-hero {
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 18%) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 14%) 0%, transparent 70%),
+      var(--cg-card);
+  }
+
+  .dark .cg-system-card:hover,
+  .dark .cg-toc a:hover {
+    border-color: oklch(1 0 0 / 16%);
+  }
+
+  .dark .cg-section:hover {
+    box-shadow: 0 4px 12px oklch(0 0 0 / 30%);
+  }
+
+  /* —— 响应式 —— */
+  @media (max-width: 820px) {
+    .codex-guide {
+      padding: 32px 16px 56px;
+    }
+
+    .cg-hero,
+    .cg-platform-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cg-hero {
+      padding: 28px;
+    }
+
+    .cg-section {
+      padding: 24px;
+    }
+
+    .cg-toc {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .codex-guide h1 {
+      font-size: 36px;
+    }
+
+    .cg-toc {
+      grid-template-columns: 1fr;
+    }
+
+    .cg-step-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+
+  /* —— 用户偏好：弱化动效 —— */
+  @media (prefers-reduced-motion: reduce) {
+    .cg-system-card,
+    .cg-toc a,
+    .cg-section,
+    .cg-copy-btn {
+      transition: none;
+    }
+  }
+</style>
+
+<div class="codex-guide">
+  <section class="cg-hero" id="docs-intro">
+    <div>
+      <div class="cg-kicker">§ 文档</div>
+      <h1>Codex <em>安装指南</em></h1>
+      <p class="cg-lead">此流程 100% 使用官方原版安装包，确保服务体验与官方完全一致。</p>
+    </div>
+    <div class="cg-system">
+      <div class="cg-system-card">
+        <span class="cg-system-label">官方原版安装</span>
+        <p>100% 使用官方原版安装包。</p>
+      </div>
+      <div class="cg-system-card">
+        <span class="cg-system-label">Windows 系统要求</span>
+        <p>Windows 10（版本 1809 / build 17763）及以上。</p>
+      </div>
+      <div class="cg-system-card">
+        <span class="cg-system-label">macOS / Linux 系统要求</span>
+        <p>macOS 10.15+ 或任意现代 Linux 发行版。</p>
+      </div>
+    </div>
+  </section>
+
+  <nav class="cg-toc" aria-label="本页目录">
+    <a href="#docs-intro">概览</a>
+    <a href="#docs-step-1">安装 Codex CLI</a>
+    <a href="#docs-step-2">创建 .codex 目录</a>
+    <a href="#docs-step-3">获取 API 密钥</a>
+    <a href="#docs-step-4">创建 auth.json</a>
+    <a href="#docs-step-5">创建 config.toml</a>
+    <a href="#docs-step-6">重启并验证</a>
+    <a href="#docs-step-7">开始使用</a>
+  </nav>
+
+  <section class="cg-section" id="docs-step-1">
+    <div class="cg-step-head">
+      <span class="cg-num">01</span>
+      <h2>安装 <em>Codex CLI</em></h2>
+    </div>
+    <p>运行以下任意一条命令，全局安装官方 Codex CLI：</p>
+    <div class="cg-code-box" aria-label="安装 Codex CLI 命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制安装 Codex CLI 命令">复制</button>
+      <span>npm install -g @openai/codex</span>
+      <span class="cg-muted-code">&#35; 或者 / or</span>
+      <span>brew install codex</span>
+    </div>
+    <div class="cg-note"><p>两条命令安装的是同一个包，选择适合你环境的即可。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-step-2">
+    <div class="cg-step-head">
+      <span class="cg-num">02</span>
+      <h2>创建 <em>.codex 目录</em></h2>
+    </div>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>macOS / Linux</h3>
+        <p>在终端中执行以下命令：</p>
+        <div class="cg-code-box" aria-label="macOS 和 Linux 创建 .codex 目录命令">
+          <button class="cg-copy-btn" type="button" aria-label="复制 macOS 和 Linux 创建 .codex 目录命令">复制</button>
+          <span>rm -rf ~/.codex</span>
+          <span>mkdir ~/.codex</span>
+        </div>
+      </div>
+      <div class="cg-platform">
+        <h3>Windows</h3>
+        <p>若目录已存在请先删除，再重新创建（在文件资源管理器或 PowerShell 中操作）：</p>
+        <div class="cg-code-box" aria-label="Windows 创建 .codex 目录命令">
+          <button class="cg-copy-btn" type="button" aria-label="复制 Windows 创建 .codex 目录命令">复制</button>
+          <span class="cg-muted-code">&#35; PowerShell</span>
+          <span>Remove-Item -Recurse -Force ~\.codex -ErrorAction SilentlyContinue</span>
+          <span>New-Item -ItemType Directory ~\.codex</span>
+        </div>
+        <div class="cg-note"><p>将 &lt;your-username&gt; 替换为你的实际 Windows 用户名。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section" id="docs-step-3">
+    <div class="cg-step-head">
+      <span class="cg-num">03</span>
+      <h2>获取 <em>API 密钥</em></h2>
+    </div>
+    <p>前往控制台的 <a class="cg-link" href="/console/token">「令牌管理」</a> 页面，创建一个新密钥并复制。</p>
+  </section>
+
+  <section class="cg-section" id="docs-step-4">
+    <div class="cg-step-head">
+      <span class="cg-num">04</span>
+      <h2>创建 <em>auth.json</em></h2>
+    </div>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>macOS / Linux</h3>
+        <p>在 ~/.codex 路径下，删除已有的 auth.json（若有），新建一个：</p>
+      </div>
+      <div class="cg-platform">
+        <h3>Windows</h3>
+        <p>在 C:\Users\&lt;your-username&gt;\.codex 路径下，删除已有的 auth.json（若有），新建一个：</p>
+      </div>
+    </div>
+    <div class="cg-code-box" aria-label="auth.json 文件内容">
+      <button class="cg-copy-btn" type="button" aria-label="复制 auth.json 文件内容">复制</button>
+      <span>{</span>
+      <span>  "OPENAI_API_KEY": "YOUR_API_KEY"</span>
+      <span>}</span>
+    </div>
+    <div class="cg-note"><p>将 YOUR_API_KEY 替换为上一步复制的密钥。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-step-5">
+    <div class="cg-step-head">
+      <span class="cg-num">05</span>
+      <h2>创建 <em>config.toml</em></h2>
+    </div>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>macOS / Linux</h3>
+        <p>在 ~/.codex 路径下，删除已有的 config.toml（若有），新建一个：</p>
+      </div>
+      <div class="cg-platform">
+        <h3>Windows</h3>
+        <p>在 C:\Users\&lt;your-username&gt;\.codex 路径下，删除已有的 config.toml（若有），新建一个：</p>
+      </div>
+    </div>
+    <div class="cg-code-box" aria-label="config.toml 文件内容">
+      <button class="cg-copy-btn" type="button" aria-label="复制 config.toml 文件内容">复制</button>
+      <span>model_provider = "OpenAIGPT"</span>
+      <span>model = "gpt-5.5"</span>
+      <span>model_reasoning_effort = "xhigh"</span>
+      <span>disable_response_storage = true</span>
+      <span>preferred_auth_method = "apikey"</span>
+      <span></span>
+      <span>[model_providers.OpenAIGPT]</span>
+      <span>name = "OpenAIGPT"</span>
+      <span>base_url = "https://new-api-latest-xhh3.onrender.com/v1"</span>
+      <span>wire_api = "responses"</span>
+    </div>
+    <div class="cg-note"><p>以下内容请原封不动粘贴，不要修改任何值。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-step-6">
+    <div class="cg-step-head">
+      <span class="cg-num">06</span>
+      <h2>重启终端 <em>验证安装</em></h2>
+    </div>
+    <p>重启终端后运行以下命令，确认安装成功：</p>
+    <div class="cg-code-box" aria-label="验证 Codex 安装命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制验证 Codex 安装命令">复制</button>
+      <span>codex -V</span>
+    </div>
+    <div class="cg-note"><p>若输出版本号，则说明 Codex 已正确安装。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-step-7">
+    <div class="cg-step-head">
+      <span class="cg-num">07</span>
+      <h2>开始 <em>使用 Codex</em></h2>
+    </div>
+    <p>进入任意项目目录，启动 Codex：</p>
+    <div class="cg-code-box" aria-label="启动 Codex 命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制启动 Codex 命令">复制</button>
+      <span class="cg-muted-code">&#35; 切换到项目目录 / Navigate to project</span>
+      <span>cd your-project-folder</span>
+      <span></span>
+      <span class="cg-muted-code">&#35; 启动 Codex / Launch Codex</span>
+      <span>codex</span>
+    </div>
+    <div class="cg-note"><p>完全支持 VSCode 官方插件。</p></div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    if (window.__codexGuideCopyBound) return
+    window.__codexGuideCopyBound = true
+
+    function readCodeText(button) {
+      var codeBox = button.closest('.cg-code-box')
+      if (!codeBox) return ''
+
+      return Array.prototype.slice
+        .call(codeBox.querySelectorAll('span'))
+        .map(function (line) {
+          return line.textContent || ''
+        })
+        .join('\n')
+        .replace(/\n+$/, '')
+    }
+
+    function fallbackCopy(text) {
+      var textarea = document.createElement('textarea')
+      textarea.value = text
+      textarea.setAttribute('readonly', '')
+      textarea.style.position = 'fixed'
+      textarea.style.left = '-9999px'
+      textarea.style.top = '-9999px'
+      textarea.style.opacity = '0'
+
+      document.body.appendChild(textarea)
+      textarea.focus()
+      textarea.select()
+      textarea.setSelectionRange(0, text.length)
+
+      try {
+        var copied = document.execCommand('copy')
+        document.body.removeChild(textarea)
+        return copied
+      } catch (error) {
+        document.body.removeChild(textarea)
+        return false
+      }
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).then(
+          function () {
+            return true
+          },
+          function () {
+            return fallbackCopy(text)
+          }
+        )
+      }
+
+      return Promise.resolve(fallbackCopy(text))
+    }
+
+    function setButtonStatus(button, copied) {
+      if (!button.dataset.defaultText) {
+        button.dataset.defaultText = button.textContent || '复制'
+      }
+
+      if (button.__cgCopyTimer) {
+        window.clearTimeout(button.__cgCopyTimer)
+      }
+
+      button.dataset.copied = copied ? 'true' : 'false'
+      button.textContent = copied ? '已复制' : '复制失败'
+
+      button.__cgCopyTimer = window.setTimeout(function () {
+        button.dataset.copied = 'false'
+        button.textContent = button.dataset.defaultText || '复制'
+      }, 1600)
+    }
+
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest && event.target.closest('.cg-copy-btn')
+      if (!button || !button.closest('.codex-guide')) return
+
+      event.preventDefault()
+      var text = readCodeText(button)
+      if (!text) {
+        setButtonStatus(button, false)
+        return
+      }
+
+      copyText(text).then(function (copied) {
+        setButtonStatus(button, copied)
+      })
+    })
+  })()
+</script>
