@@ -40,6 +40,71 @@
     box-sizing: border-box;
   }
 
+  /* —— 顶部充值入口 —— */
+  .cg-recharge-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 16px;
+    padding: 18px 20px;
+    border: 1px solid oklch(0.74 0.15 55 / 45%);
+    border-radius: calc(var(--cg-radius) * 1.5);
+    background:
+      radial-gradient(circle at 0 0, oklch(0.78 0.16 70 / 24%), transparent 42%),
+      linear-gradient(135deg, oklch(0.25 0.08 35), oklch(0.2 0.06 25));
+    color: oklch(0.98 0.01 75);
+    box-shadow: 0 12px 30px oklch(0.2 0.08 35 / 16%);
+  }
+
+  .cg-recharge-content {
+    min-width: 0;
+  }
+
+  .cg-recharge-label {
+    display: block;
+    margin-bottom: 3px;
+    color: oklch(0.84 0.13 75);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cg-recharge-title {
+    display: block;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .cg-recharge-desc {
+    margin: 3px 0 0;
+    color: oklch(0.88 0.02 65);
+    font-size: 13px;
+  }
+
+  .cg-recharge-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: var(--cg-radius);
+    background: white;
+    color: oklch(0.22 0.06 30);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 150ms ease, background 150ms ease;
+  }
+
+  .cg-recharge-button:hover {
+    transform: translateY(-1px);
+    background: oklch(0.95 0.03 75);
+  }
+
   /* —— Hero —— */
   .cg-hero {
     position: relative;
@@ -349,6 +414,67 @@
     text-decoration-color: var(--cg-foreground);
   }
 
+  /* —— 长教程阅读优化 —— */
+  .cg-section {
+    scroll-margin-top: 88px;
+  }
+
+  .cg-section > h3 {
+    margin: 28px 0 8px;
+    color: var(--cg-foreground);
+    font-size: 16px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .cg-section > h3::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 3px;
+    margin: 0 8px 4px 0;
+    border-radius: 999px;
+    background: var(--cg-foreground);
+    opacity: 0.45;
+  }
+
+  .cg-platform .cg-code-box {
+    margin-bottom: 0;
+    padding-right: 86px;
+  }
+
+  .cg-section a[target='_blank']::after {
+    content: ' ↗';
+    font-size: 0.82em;
+    text-decoration: none;
+  }
+
+  #docs-windows {
+    border-top: 3px solid oklch(0.58 0.16 245);
+  }
+
+  #docs-windows .cg-num {
+    background: oklch(0.48 0.15 245);
+  }
+
+  #docs-macos {
+    border-top: 3px solid oklch(0.62 0.03 260);
+  }
+
+  #docs-linux {
+    border-top: 3px solid oklch(0.68 0.16 65);
+  }
+
+  #docs-linux .cg-num {
+    background: oklch(0.48 0.13 55);
+  }
+
+  #docs-sources {
+    background:
+      radial-gradient(circle at 100% 0%, oklch(0.72 0.1 230 / 10%), transparent 32%),
+      var(--cg-card);
+  }
+
   /* —— 暗色模式（跟随 web/default 的 .dark 父级） —— */
   .dark .codex-guide {
     --cg-background: oklch(0.185 0 0);
@@ -426,6 +552,26 @@
       align-items: flex-start;
       gap: 10px;
     }
+
+    .cg-code-box,
+    .cg-platform .cg-code-box {
+      padding: 52px 16px 16px;
+    }
+
+    .cg-copy-btn {
+      top: 10px;
+      right: 10px;
+    }
+
+    .cg-recharge-banner {
+      align-items: stretch;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .cg-recharge-button {
+      width: 100%;
+    }
   }
 
   /* —— 用户偏好：弱化动效 —— */
@@ -440,104 +586,282 @@
 </style>
 
 <div class="codex-guide">
+  <aside class="cg-recharge-banner" aria-label="账户充值入口">
+    <div class="cg-recharge-content">
+      <span class="cg-recharge-label">Recharge · 账户充值</span>
+      <strong class="cg-recharge-title">需要增加账户额度？</strong>
+      <p class="cg-recharge-desc">点击右侧按钮前往充值商城，完成购买后返回本站使用。</p>
+    </div>
+    <a class="cg-recharge-button" href="https://pay.ldxp.cn/shop/C6XULMDA" target="_blank" rel="noopener noreferrer">立即充值 ↗</a>
+  </aside>
+
   <section class="cg-hero" id="docs-intro">
     <div>
-      <div class="cg-kicker">§ 文档</div>
-      <h1>Codex <em>安装指南</em></h1>
-      <p class="cg-lead">此流程 100% 使用官方原版安装包，确保服务体验与官方完全一致。</p>
+      <div class="cg-kicker">§ Codex CLI · 分系统安装</div>
+      <h1>Codex CLI <em>安装与配置指南</em></h1>
+      <p class="cg-lead">请先选择你的操作系统和安装方式。推荐使用 OpenAI 官方独立安装器；只有选择 npm 安装时才需要先安装 Node.js。</p>
     </div>
     <div class="cg-system">
       <div class="cg-system-card">
-        <span class="cg-system-label">官方原版安装</span>
-        <p>100% 使用官方原版安装包。</p>
+        <span class="cg-system-label">推荐方式</span>
+        <p>Windows 使用官方 PowerShell 安装器；macOS/Linux 使用官方 Shell 安装器。两者都不要求 Node.js。</p>
       </div>
       <div class="cg-system-card">
-        <span class="cg-system-label">Windows 系统要求</span>
-        <p>Windows 10（版本 1809 / build 17763）及以上。</p>
+        <span class="cg-system-label">Node.js 是否必须？</span>
+        <p>不是。仅 npm 路线需要 Node.js/npm；当前 npm 包声明 Node.js 16+，实际建议安装最新 LTS。</p>
       </div>
       <div class="cg-system-card">
-        <span class="cg-system-label">macOS / Linux 系统要求</span>
-        <p>macOS 10.15+ 或任意现代 Linux 发行版。</p>
+        <span class="cg-system-label">官方仓库环境基线</span>
+        <p>macOS 12+、Ubuntu 20.04+/Debian 10+；Windows 推荐 Windows 11 + WSL2。内存最低 4 GB，建议 8 GB。</p>
       </div>
     </div>
   </section>
 
   <nav class="cg-toc" aria-label="本页目录">
-    <a href="#docs-intro">概览</a>
-    <a href="#docs-step-1">安装 Codex CLI</a>
-    <a href="#docs-step-2">创建 .codex 目录</a>
-    <a href="#docs-step-3">获取 API 密钥</a>
-    <a href="#docs-step-4">创建 auth.json</a>
-    <a href="#docs-step-5">创建 config.toml</a>
-    <a href="#docs-step-6">重启并验证</a>
-    <a href="#docs-step-7">开始使用</a>
+    <a href="#docs-methods">安装方式说明</a>
+    <a href="#docs-windows">Windows</a>
+    <a href="#docs-macos">macOS</a>
+    <a href="#docs-linux">Linux</a>
+    <a href="#docs-verify">验证安装</a>
+    <a href="#docs-token">获取 API 密钥</a>
+    <a href="#docs-directory">配置目录</a>
+    <a href="#docs-auth">auth.json</a>
+    <a href="#docs-config">config.toml</a>
+    <a href="#docs-use">使用与更新</a>
+    <a href="#docs-troubleshooting">常见问题</a>
+    <a href="#docs-sources">官方资料</a>
   </nav>
 
-  <section class="cg-section" id="docs-step-1">
+  <section class="cg-section" id="docs-methods">
     <div class="cg-step-head">
       <span class="cg-num">01</span>
-      <h2>安装 <em>Codex CLI</em></h2>
-    </div>
-    <p>运行以下任意一条命令，全局安装官方 Codex CLI：</p>
-    <div class="cg-code-box" aria-label="安装 Codex CLI 命令">
-      <button class="cg-copy-btn" type="button" aria-label="复制安装 Codex CLI 命令">复制</button>
-      <span>npm install -g @openai/codex</span>
-      <span class="cg-muted-code">&#35; 或者 / or</span>
-      <span>brew install codex</span>
-    </div>
-    <div class="cg-note"><p>两条命令安装的是同一个包，选择适合你环境的即可。</p></div>
-  </section>
-
-  <section class="cg-section" id="docs-step-2">
-    <div class="cg-step-head">
-      <span class="cg-num">02</span>
-      <h2>创建 <em>.codex 目录</em></h2>
+      <h2>先选择 <em>安装方式</em></h2>
     </div>
     <div class="cg-platform-grid">
       <div class="cg-platform">
-        <h3>macOS / Linux</h3>
-        <p>在终端中执行以下命令：</p>
-        <div class="cg-code-box" aria-label="macOS 和 Linux 创建 .codex 目录命令">
-          <button class="cg-copy-btn" type="button" aria-label="复制 macOS 和 Linux 创建 .codex 目录命令">复制</button>
-          <span>rm -rf ~/.codex</span>
-          <span>mkdir ~/.codex</span>
+        <h3>官方独立安装器（推荐）</h3>
+        <p>直接安装 Codex 原生程序，不依赖 Node.js/npm。适合绝大多数用户，升级时重新运行同一条安装命令即可。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>npm 安装</h3>
+        <p>适合已经在使用 Node.js 的开发者。需要 Node.js 16+ 和 npm，建议使用最新 LTS，避免系统仓库中的过旧版本。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>Homebrew 安装</h3>
+        <p>适合 macOS 用户。当前官方命令是 brew install --cask codex，不是 brew install codex。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>WSL2 安装</h3>
+        <p>适合 Windows 上需要完整 Linux 工具链、容器和 Shell 脚本的用户；进入 WSL 后按照 Linux 步骤安装。</p>
+      </div>
+    </div>
+    <div class="cg-note"><p>不要同时混用独立安装器、npm 和 Homebrew。多种安装共存容易出现“升级了但终端仍运行旧版本”的 PATH 冲突。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-windows">
+    <div class="cg-step-head">
+      <span class="cg-num">02</span>
+      <h2>Windows <em>安装步骤</em></h2>
+    </div>
+    <h3>方案 A：官方 PowerShell 安装器（简单、无需 Node.js）</h3>
+    <p>打开 PowerShell，执行 OpenAI 官方快速开始提供的安装命令：</p>
+    <div class="cg-code-box" aria-label="Windows 官方安装命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Windows 官方安装命令">复制</button>
+      <span>powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"</span>
+    </div>
+    <p>安装完成后关闭并重新打开 PowerShell，然后验证：</p>
+    <div class="cg-code-box" aria-label="Windows 验证命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Windows 验证命令">复制</button>
+      <span>codex --version</span>
+      <span>Get-Command codex</span>
+    </div>
+
+    <h3>方案 B：WSL2（推荐给开发环境用户）</h3>
+    <p>OpenAI 当前快速开始提供原生 Windows 安装器，但 Codex 仓库的系统要求仍将 Windows 11 + WSL2 列为正式环境。需要 Linux 工具链时，优先选择 WSL2。</p>
+    <p>以管理员身份打开 PowerShell：</p>
+    <div class="cg-code-box" aria-label="安装 WSL2 命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制安装 WSL2 命令">复制</button>
+      <span>wsl --install</span>
+    </div>
+    <p>按提示重启电脑，打开 Ubuntu 并完成用户名/密码初始化，然后在 WSL 终端执行：</p>
+    <div class="cg-code-box" aria-label="WSL 中安装 Codex">
+      <button class="cg-copy-btn" type="button" aria-label="复制 WSL 中安装 Codex">复制</button>
+      <span>sudo apt update</span>
+      <span>sudo apt install -y curl</span>
+      <span>curl -fsSL https://chatgpt.com/codex/install.sh | sh</span>
+      <span>codex --version</span>
+    </div>
+    <div class="cg-note"><p>Microsoft 的一键 wsl --install 要求 Windows 10 2004（Build 19041）及以上或 Windows 11。WSL 与原生 Windows 使用不同的用户目录，.codex 配置也要放在你实际运行 Codex 的那一侧。</p></div>
+
+    <h3>方案 C：npm（需要 Node.js）</h3>
+    <p>前往 <a class="cg-link" href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">Node.js 官方下载页</a>，下载并安装 LTS 版本。安装程序保持默认选项，确保同时安装 npm 并加入 PATH。重新打开 PowerShell后执行：</p>
+    <div class="cg-code-box" aria-label="Windows Node.js 与 npm 安装验证">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Windows npm 安装步骤">复制</button>
+      <span>node --version</span>
+      <span>npm --version</span>
+      <span>npm install -g @openai/codex</span>
+      <span>codex --version</span>
+    </div>
+  </section>
+
+  <section class="cg-section" id="docs-macos">
+    <div class="cg-step-head">
+      <span class="cg-num">03</span>
+      <h2>macOS <em>安装步骤</em></h2>
+    </div>
+    <p>官方仓库当前列出的系统要求为 macOS 12+，支持 Apple Silicon 和 Intel Mac。</p>
+    <h3>方案 A：官方独立安装器（推荐、无需 Node.js）</h3>
+    <div class="cg-code-box" aria-label="macOS 官方安装命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制 macOS 官方安装命令">复制</button>
+      <span>curl -fsSL https://chatgpt.com/codex/install.sh | sh</span>
+      <span>codex --version</span>
+    </div>
+
+    <h3>方案 B：Homebrew</h3>
+    <p>如果尚未安装 Homebrew，先使用其官网提供的命令：</p>
+    <div class="cg-code-box" aria-label="安装 Homebrew">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Homebrew 安装命令">复制</button>
+      <span>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
+    </div>
+    <p>按照安装器最后给出的提示把 brew 加入 PATH，然后安装 Codex：</p>
+    <div class="cg-code-box" aria-label="Homebrew 安装 Codex">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Homebrew 安装 Codex 命令">复制</button>
+      <span>brew install --cask codex</span>
+      <span>codex --version</span>
+    </div>
+
+    <h3>方案 C：npm（需要 Node.js）</h3>
+    <p>可以从 Node.js 官网安装 LTS 的 macOS .pkg，也可以在已有 Homebrew 的情况下执行：</p>
+    <div class="cg-code-box" aria-label="macOS Node.js 与 npm 安装 Codex">
+      <button class="cg-copy-btn" type="button" aria-label="复制 macOS npm 安装步骤">复制</button>
+      <span>brew install node</span>
+      <span>node --version</span>
+      <span>npm --version</span>
+      <span>npm install -g @openai/codex</span>
+      <span>codex --version</span>
+    </div>
+    <div class="cg-note"><p>如果 npm 出现 EACCES 权限错误，不要直接使用 sudo npm。建议改用官方独立安装器，或使用 Node 版本管理器后再安装。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-linux">
+    <div class="cg-step-head">
+      <span class="cg-num">04</span>
+      <h2>Linux <em>安装步骤</em></h2>
+    </div>
+    <p>官方仓库当前列出的基线为 Ubuntu 20.04+ 或 Debian 10+。其他现代发行版通常也能运行，但需要自行保证 curl、证书和常用开发工具可用。</p>
+    <h3>方案 A：官方独立安装器（推荐、无需 Node.js）</h3>
+    <p>如果系统没有 curl，先按发行版安装：</p>
+    <div class="cg-code-box" aria-label="Linux 安装 curl">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Linux curl 安装命令">复制</button>
+      <span class="cg-muted-code">&#35; Ubuntu / Debian</span>
+      <span>sudo apt update &amp;&amp; sudo apt install -y curl</span>
+      <span></span>
+      <span class="cg-muted-code">&#35; Fedora / RHEL</span>
+      <span>sudo dnf install -y curl</span>
+      <span></span>
+      <span class="cg-muted-code">&#35; Arch Linux</span>
+      <span>sudo pacman -S curl</span>
+    </div>
+    <p>安装 Codex：</p>
+    <div class="cg-code-box" aria-label="Linux 官方安装命令">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Linux 官方安装命令">复制</button>
+      <span>curl -fsSL https://chatgpt.com/codex/install.sh | sh</span>
+      <span>codex --version</span>
+    </div>
+
+    <h3>方案 B：npm（需要 Node.js/npm）</h3>
+    <p>不建议依赖发行版仓库中的旧 Node.js。下面使用 Node.js 官方下载页当前推荐的 nvm 路线安装 LTS：</p>
+    <div class="cg-code-box" aria-label="Linux 使用 nvm 安装 Node.js LTS 和 Codex">
+      <button class="cg-copy-btn" type="button" aria-label="复制 Linux npm 安装步骤">复制</button>
+      <span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash</span>
+      <span class="cg-muted-code">&#35; 关闭并重新打开终端后继续</span>
+      <span>nvm install --lts</span>
+      <span>nvm use --lts</span>
+      <span>node --version</span>
+      <span>npm --version</span>
+      <span>npm install -g @openai/codex</span>
+      <span>codex --version</span>
+    </div>
+    <div class="cg-note"><p>当前 @openai/codex npm 包声明 Node.js 16+；建议始终使用仍在维护的 LTS，而不是只满足最低版本。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-verify">
+    <div class="cg-step-head">
+      <span class="cg-num">05</span>
+      <h2>验证安装与 <em>定位命令</em></h2>
+    </div>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>macOS / Linux / WSL</h3>
+        <div class="cg-code-box" aria-label="macOS Linux 验证 Codex">
+          <button class="cg-copy-btn" type="button" aria-label="复制 macOS Linux 验证命令">复制</button>
+          <span>codex --version</span>
+          <span>command -v codex</span>
+          <span>type -a codex</span>
         </div>
       </div>
       <div class="cg-platform">
-        <h3>Windows</h3>
-        <p>若目录已存在请先删除，再重新创建（在文件资源管理器或 PowerShell 中操作）：</p>
-        <div class="cg-code-box" aria-label="Windows 创建 .codex 目录命令">
-          <button class="cg-copy-btn" type="button" aria-label="复制 Windows 创建 .codex 目录命令">复制</button>
-          <span class="cg-muted-code">&#35; PowerShell</span>
-          <span>Remove-Item -Recurse -Force ~\.codex -ErrorAction SilentlyContinue</span>
-          <span>New-Item -ItemType Directory ~\.codex</span>
+        <h3>Windows PowerShell</h3>
+        <div class="cg-code-box" aria-label="Windows 验证 Codex">
+          <button class="cg-copy-btn" type="button" aria-label="复制 Windows 验证命令">复制</button>
+          <span>codex --version</span>
+          <span>Get-Command codex -All</span>
+          <span>where.exe codex</span>
         </div>
-        <div class="cg-note"><p>将 &lt;your-username&gt; 替换为你的实际 Windows 用户名。</p></div>
+      </div>
+    </div>
+    <div class="cg-note"><p>如果列出多个 codex 路径，说明存在重复安装。保留一种安装方式并清理旧路径，否则升级后仍可能启动旧版本。</p></div>
+  </section>
+
+  <section class="cg-section" id="docs-token">
+    <div class="cg-step-head">
+      <span class="cg-num">06</span>
+      <h2>获取 <em>API 密钥</em></h2>
+    </div>
+    <p>登录本站后前往 <a class="cg-link" href="/console/token">「令牌管理」</a>，创建并复制一个 API 密钥。密钥只应保存在你自己的设备中，不要发给他人或提交到 Git 仓库。</p>
+  </section>
+
+  <section class="cg-section" id="docs-directory">
+    <div class="cg-step-head">
+      <span class="cg-num">07</span>
+      <h2>创建并备份 <em>.codex 配置目录</em></h2>
+    </div>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>macOS / Linux / WSL</h3>
+        <div class="cg-code-box" aria-label="创建 Unix Codex 配置目录">
+          <button class="cg-copy-btn" type="button" aria-label="复制 Unix 配置目录命令">复制</button>
+          <span>mkdir -p ~/.codex</span>
+          <span>chmod 700 ~/.codex</span>
+          <span>cp ~/.codex/auth.json ~/.codex/auth.json.bak 2&gt;/dev/null || true</span>
+          <span>cp ~/.codex/config.toml ~/.codex/config.toml.bak 2&gt;/dev/null || true</span>
+        </div>
+      </div>
+      <div class="cg-platform">
+        <h3>Windows PowerShell</h3>
+        <div class="cg-code-box" aria-label="创建 Windows Codex 配置目录">
+          <button class="cg-copy-btn" type="button" aria-label="复制 Windows 配置目录命令">复制</button>
+          <span>New-Item -ItemType Directory -Force "$HOME\.codex"</span>
+          <span>Copy-Item "$HOME\.codex\auth.json" "$HOME\.codex\auth.json.bak" -ErrorAction SilentlyContinue</span>
+          <span>Copy-Item "$HOME\.codex\config.toml" "$HOME\.codex\config.toml.bak" -ErrorAction SilentlyContinue</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cg-section" id="docs-step-3">
+  <section class="cg-section" id="docs-auth">
     <div class="cg-step-head">
-      <span class="cg-num">03</span>
-      <h2>获取 <em>API 密钥</em></h2>
-    </div>
-    <p>前往控制台的 <a class="cg-link" href="/console/token">「令牌管理」</a> 页面，创建一个新密钥并复制。</p>
-  </section>
-
-  <section class="cg-section" id="docs-step-4">
-    <div class="cg-step-head">
-      <span class="cg-num">04</span>
+      <span class="cg-num">08</span>
       <h2>创建 <em>auth.json</em></h2>
     </div>
     <div class="cg-platform-grid">
       <div class="cg-platform">
-        <h3>macOS / Linux</h3>
-        <p>在 ~/.codex 路径下，删除已有的 auth.json（若有），新建一个：</p>
+        <h3>macOS / Linux / WSL</h3>
+        <p>编辑 ~/.codex/auth.json，保存后执行 chmod 600 ~/.codex/auth.json。</p>
       </div>
       <div class="cg-platform">
         <h3>Windows</h3>
-        <p>在 C:\Users\&lt;your-username&gt;\.codex 路径下，删除已有的 auth.json（若有），新建一个：</p>
+        <p>使用记事本打开 $HOME\.codex\auth.json。保存时选择“所有文件”，避免文件名变成 auth.json.txt。</p>
       </div>
     </div>
     <div class="cg-code-box" aria-label="auth.json 文件内容">
@@ -546,22 +870,22 @@
       <span>  "OPENAI_API_KEY": "YOUR_API_KEY"</span>
       <span>}</span>
     </div>
-    <div class="cg-note"><p>将 YOUR_API_KEY 替换为上一步复制的密钥。</p></div>
+    <div class="cg-note"><p>把 YOUR_API_KEY 替换为上一步创建的密钥。JSON 最后一项后面不要添加逗号。</p></div>
   </section>
 
-  <section class="cg-section" id="docs-step-5">
+  <section class="cg-section" id="docs-config">
     <div class="cg-step-head">
-      <span class="cg-num">05</span>
+      <span class="cg-num">09</span>
       <h2>创建 <em>config.toml</em></h2>
     </div>
     <div class="cg-platform-grid">
       <div class="cg-platform">
-        <h3>macOS / Linux</h3>
-        <p>在 ~/.codex 路径下，删除已有的 config.toml（若有），新建一个：</p>
+        <h3>macOS / Linux / WSL</h3>
+        <p>文件路径：~/.codex/config.toml</p>
       </div>
       <div class="cg-platform">
         <h3>Windows</h3>
-        <p>在 C:\Users\&lt;your-username&gt;\.codex 路径下，删除已有的 config.toml（若有），新建一个：</p>
+        <p>文件路径：$HOME\.codex\config.toml。确认扩展名不是 .toml.txt。</p>
       </div>
     </div>
     <div class="cg-code-box" aria-label="config.toml 文件内容">
@@ -577,40 +901,105 @@
       <span>base_url = "https://tzhapi.cc.cd/v1"</span>
       <span>wire_api = "responses"</span>
     </div>
-    <div class="cg-note"><p>以下内容请原封不动粘贴，不要修改任何值。</p></div>
+    <div class="cg-note"><p>请保持 TOML 的引号、大小写和层级不变。若启动时提示模型不可用，请在本站控制台确认账号可用模型后再修改 model。</p></div>
   </section>
 
-  <section class="cg-section" id="docs-step-6">
+  <section class="cg-section" id="docs-use">
     <div class="cg-step-head">
-      <span class="cg-num">06</span>
-      <h2>重启终端 <em>验证安装</em></h2>
+      <span class="cg-num">10</span>
+      <h2>开始使用与 <em>更新 Codex</em></h2>
     </div>
-    <p>重启终端后运行以下命令，确认安装成功：</p>
-    <div class="cg-code-box" aria-label="验证 Codex 安装命令">
-      <button class="cg-copy-btn" type="button" aria-label="复制验证 Codex 安装命令">复制</button>
-      <span>codex -V</span>
-    </div>
-    <div class="cg-note"><p>若输出版本号，则说明 Codex 已正确安装。</p></div>
-  </section>
-
-  <section class="cg-section" id="docs-step-7">
-    <div class="cg-step-head">
-      <span class="cg-num">07</span>
-      <h2>开始 <em>使用 Codex</em></h2>
-    </div>
-    <p>进入任意项目目录，启动 Codex：</p>
-    <div class="cg-code-box" aria-label="启动 Codex 命令">
+    <p>进入你的项目目录后启动 Codex：</p>
+    <div class="cg-code-box" aria-label="启动 Codex">
       <button class="cg-copy-btn" type="button" aria-label="复制启动 Codex 命令">复制</button>
-      <span class="cg-muted-code">&#35; 切换到项目目录 / Navigate to project</span>
       <span>cd your-project-folder</span>
-      <span></span>
-      <span class="cg-muted-code">&#35; 启动 Codex / Launch Codex</span>
       <span>codex</span>
     </div>
-    <div class="cg-note"><p>完全支持 VSCode 官方插件。</p></div>
+    <p>按最初选择的安装方式更新，不要混用：</p>
+    <div class="cg-code-box" aria-label="更新 Codex">
+      <button class="cg-copy-btn" type="button" aria-label="复制更新 Codex 命令">复制</button>
+      <span class="cg-muted-code">&#35; macOS / Linux 官方独立安装器：重新运行</span>
+      <span>curl -fsSL https://chatgpt.com/codex/install.sh | sh</span>
+      <span></span>
+      <span class="cg-muted-code">&#35; Windows 官方独立安装器：重新运行</span>
+      <span>powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"</span>
+      <span></span>
+      <span class="cg-muted-code">&#35; npm</span>
+      <span>npm install -g @openai/codex@latest</span>
+      <span></span>
+      <span class="cg-muted-code">&#35; Homebrew</span>
+      <span>brew upgrade --cask codex</span>
+    </div>
+    <p>更新后重新打开终端，并运行 codex --version 确认。</p>
+  </section>
+
+  <section class="cg-section" id="docs-troubleshooting">
+    <div class="cg-step-head">
+      <span class="cg-num">11</span>
+      <h2>常见问题 <em>快速排查</em></h2>
+    </div>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>codex: command not found</h3>
+        <p>重新打开终端；检查 command -v codex、Get-Command codex；确认安装目录已加入 PATH。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>npm 权限错误 / EACCES</h3>
+        <p>不要使用 sudo npm。改用官方独立安装器，或使用 nvm 管理用户级 Node.js。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>Windows 配置不生效</h3>
+        <p>确认文件不是 auth.json.txt/config.toml.txt，并确认你运行的是原生 Windows 还是 WSL 中的 Codex。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>401 / Unauthorized</h3>
+        <p>检查 API 密钥是否完整、auth.json 是否为有效 JSON，以及令牌是否已启用且仍有额度。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>更新后还是旧版本</h3>
+        <p>系统中通常存在多个 codex。用 type -a codex 或 Get-Command codex -All 找到并清理旧安装。</p>
+      </div>
+      <div class="cg-platform">
+        <h3>WSL 项目速度较慢</h3>
+        <p>建议把项目放在 WSL 的 ~/projects 中，而不是 /mnt/c 下，再从 WSL 终端运行 Codex。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section" id="docs-sources">
+    <div class="cg-step-head">
+      <span class="cg-num">12</span>
+      <h2>资料来源与 <em>更新时间</em></h2>
+    </div>
+    <p>本教程于 2026-07-11 根据以下官方资料核对。安装命令和系统要求可能随版本变化，遇到差异时以官方页面为准。</p>
+    <div class="cg-platform-grid">
+      <div class="cg-platform">
+        <h3>OpenAI Codex 快速开始</h3>
+        <p><a class="cg-link" href="https://github.com/openai/codex#quickstart" target="_blank" rel="noopener noreferrer">GitHub 官方 README</a></p>
+      </div>
+      <div class="cg-platform">
+        <h3>OpenAI Codex CLI 文档</h3>
+        <p><a class="cg-link" href="https://developers.openai.com/codex/cli/" target="_blank" rel="noopener noreferrer">developers.openai.com</a></p>
+      </div>
+      <div class="cg-platform">
+        <h3>Codex 系统要求</h3>
+        <p><a class="cg-link" href="https://github.com/openai/codex/blob/main/docs/install.md" target="_blank" rel="noopener noreferrer">OpenAI 安装与构建说明</a></p>
+      </div>
+      <div class="cg-platform">
+        <h3>Node.js LTS</h3>
+        <p><a class="cg-link" href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">Node.js 官方下载页</a></p>
+      </div>
+      <div class="cg-platform">
+        <h3>Microsoft WSL</h3>
+        <p><a class="cg-link" href="https://learn.microsoft.com/windows/wsl/install" target="_blank" rel="noopener noreferrer">Microsoft Learn</a></p>
+      </div>
+      <div class="cg-platform">
+        <h3>Homebrew</h3>
+        <p><a class="cg-link" href="https://brew.sh/" target="_blank" rel="noopener noreferrer">Homebrew 官网</a></p>
+      </div>
+    </div>
   </section>
 </div>
-
 <script>
   (function () {
     if (window.__codexGuideCopyBound) return
